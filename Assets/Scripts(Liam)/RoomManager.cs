@@ -10,6 +10,8 @@ public class RoomManager : MonoBehaviour
 
     private List<Cell> enteredCellsThisRound = new List<Cell>();
 
+    private int playerDepth;
+
     void Awake()
     {
         if (Instance == null) Instance = this;
@@ -26,15 +28,6 @@ public class RoomManager : MonoBehaviour
             }
 
             enteredCellsThisRound.Clear();
-        }
-    }
-
-    public void NotifyRoomEntered(Cell cell)
-    {
-        if (!enteredCellsThisRound.Contains(cell))
-        {
-            enteredCellsThisRound.Add(cell);
-            Debug.Log("Room entered at " + cell.gridPosition);
         }
     }
 
@@ -82,6 +75,17 @@ public class RoomManager : MonoBehaviour
                 return cell;
         }
         return null;
+    }
+
+    public void NotifyRoomEntered(Cell cell)
+    {
+        if (!enteredCellsThisRound.Contains(cell))
+        {
+            enteredCellsThisRound.Add(cell);
+            Vector2Int pos = cell.gridPosition;
+            playerDepth = Mathf.Max(Mathf.Abs(pos.x), Mathf.Abs(pos.y));
+            Debug.Log($"Player at depth: {playerDepth}");
+        }
     }
 }
 

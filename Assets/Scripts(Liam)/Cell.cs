@@ -8,6 +8,8 @@ public class Cell : MonoBehaviour
     public bool entered = false;
     public bool roomSpawned = false;
 
+    public int depth;
+
     public GameObject topWall;
     public GameObject bottomWall;
     public GameObject leftWall;
@@ -34,7 +36,7 @@ public class Cell : MonoBehaviour
         {
             entered = true;
             RoomManager.Instance.NotifyRoomEntered(this);
-            Debug.Log("Entered room at " + gridPosition);
+            //Debug.Log("Entered room at " + gridPosition);
         }
     }
 

@@ -13,6 +13,7 @@ public class GridManager : MonoBehaviour
     void Start()
     {
         GenerateGrid();
+        AssignStaticDepths(new Vector2Int(gridRadius/2, gridRadius/2));
     }
 
     // Update is called once per frame
@@ -56,6 +57,50 @@ public class GridManager : MonoBehaviour
                 break;
             }
 
+        }
+    }
+
+    public void AssignStaticDepths(Vector2Int center)
+    {
+        foreach (var cell in grid.Values)
+        {
+            cell.depth = -1;
+        }
+
+        Queue<Cell> queue = new Queue<Cell>();
+
+        if (grid.TryGetValue(center, out Cell startCell))
+        {
+            startCell.depth = 0;
+            queue.Enqueue(startCell);
+        }
+
+        while (queue.Count > 0)
+        {
+            Cell current = queue.Dequeue();
+
+            Vector2Int[] directions = new Vector2Int[]
+            {
+                Vector2Int.up,
+                Vector2Int.down,
+                Vector2Int.left,
+                Vector2Int.right
+            };
+
+            foreach (var dir in directions)
+            {
+                Vector2Int neighborPos = current.gridPosition + dir;
+
+                if (grid.TryGetValue(neighborPos, out Cell neighbor))
+                {
+                    if (neighbor.depth == -1)
+                    {
+                        neighbor.depth = current.depth + 1;
+                        queue.Enqueue(neighbor);
+                    }
+                }
+            }
+            
         }
     }
 }
