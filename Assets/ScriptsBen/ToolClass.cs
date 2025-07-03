@@ -13,6 +13,9 @@ public class ToolClass : ItemClass
 
         // Add more tool types as needed
     }
+    public int damage; //
+
+    public int atkSpeed; // Speed of the tool
 
     public override ItemClass GetItem()
     {

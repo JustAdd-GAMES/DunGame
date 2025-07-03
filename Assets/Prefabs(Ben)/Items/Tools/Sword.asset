@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 349d82f0706b0a94fbc3ddf978f302f1, type: 3}
   m_Name: Sword
   m_EditorClassIdentifier: 
-  itemID: 0
+  itemID: 1
   itemDescription: 
   itemName: Wooden Sword
   itemIcon: {fileID: 5206302024500879324, guid: 88018d0d6bdf44c4d8d0b96141f26c1a, type: 3}
   toolType: 0
+  damage: 1
+  atkSpeed: 1
