@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class InventoryManager : MonoBehaviour
@@ -270,4 +271,6 @@ public class InventoryManager : MonoBehaviour
     }
 
     #endregion moving stuff around
+
+    public bool IsMovingItem => isMovingItem;
 }
