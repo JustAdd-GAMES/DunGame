@@ -65,6 +65,11 @@ public class RoomManager : MonoBehaviour
 
             Instantiate(roomPrefab, target.transform.position, Quaternion.identity);
             target.hasRoom = true;
+            target.SpawnWalls(gridManager.grid);
+
+            Vector2Int direction = target.gridPosition - originCell.gridPosition;
+            originCell.RemoveWallFacing(direction);
+            target.RemoveWallFacing(-direction);
         }
     }
 

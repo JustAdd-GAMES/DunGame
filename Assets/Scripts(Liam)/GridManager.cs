@@ -52,6 +52,7 @@ public class GridManager : MonoBehaviour
             {
                 Instantiate(roomPrefab[0], cell.transform.position, Quaternion.identity);
                 cell.hasRoom = true;
+                cell.SpawnWalls(grid);
                 break;
             }
 
