@@ -1,8 +1,9 @@
 using UnityEngine;
 
-public class SlimeBehavior : MonoBehaviour
+public class SlimeBehavior : MonoBehaviour 
 {
     public Slime slimeData;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
