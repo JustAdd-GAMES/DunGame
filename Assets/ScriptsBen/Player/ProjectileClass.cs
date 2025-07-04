@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class Projectile : MonoBehaviour
 {
@@ -11,14 +12,19 @@ public class Projectile : MonoBehaviour
     private Vector2 direction;
     private Rigidbody2D rb;
 
+    // Add this field to Projectile
+    public List<ItemEffectBehaviour> effectsToApply;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
     }
 
-    public void Initialize(Vector2 fireDirection)
+    // When initializing the projectile, pass the effects
+    public void Initialize(Vector2 fireDirection, List<ItemEffectBehaviour> effects = null)
     {
         direction = fireDirection.normalized;
+        effectsToApply = effects;
         Destroy(gameObject, lifetime);
     }
 
@@ -34,6 +40,10 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        // Ignore collisions with objects tagged as "Pickup"
+        if (collision.CompareTag("Pickup"))
+            return;
+
         // Check if collision is in specified layers
         if ((collisionLayers.value & (1 << collision.gameObject.layer)) > 0)
         {
@@ -51,6 +61,14 @@ public class Projectile : MonoBehaviour
         }
         
         // Add additional collision effects here (particles, sounds, etc.)
+        if (effectsToApply != null)
+        {
+            foreach (var effect in effectsToApply)
+            {
+                if (effect != null && effect.ShouldApplyOnProjectileHit())
+                    effect.OnProjectileHit(this, collision);
+            }
+        }
         
         Destroy(gameObject);
     }

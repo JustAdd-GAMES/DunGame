@@ -1,14 +1,14 @@
 using UnityEngine;
 using System.Collections.Generic;
-[CreateAssetMenu(fileName = "NewMisc", menuName = "Items/Misc")]
+[CreateAssetMenu(fileName = "NewEquipment", menuName = "Items/Equipment")]
 public class EquipmentClass : ItemClass
 {
     [Header("Equipment")]
-    public EquipmentType equipmentType; // Type of equipment
+    public EquipmentType equipmentType; 
     public enum EquipmentType
     {
-        Accessory, // Rings, necklaces, etc.
-        // Add more equipment types as needed
+        Accessory, 
+        
     }
 
     

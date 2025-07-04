@@ -32,6 +32,8 @@ public class InventoryManager : MonoBehaviour
 
     [SerializeField] private GameObject pickupPrefab; // Assign your pickup prefab in the Inspector
 
+    private List<ItemEffectBehaviour> activeItemEffects = new List<ItemEffectBehaviour>();
+
     public void Start()
     {
         slots = new GameObject[slotHolder.transform.childCount];
@@ -51,21 +53,21 @@ public class InventoryManager : MonoBehaviour
 
     public void Update()
     {
-        
-           
-       
+
+
+
 
         if (Input.GetMouseButtonDown(0))
+        {
+            if (isMovingItem)
             {
-                if (isMovingItem)
-                {
-                    EndMoveItem();
-                }
-                else
-                {
-                    BeginMoveItem();
-                }
+                EndMoveItem();
             }
+            else
+            {
+                BeginMoveItem();
+            }
+        }
     }
 
     #region Inventory Utilities
@@ -102,10 +104,22 @@ public class InventoryManager : MonoBehaviour
             if (slotScripts[i].itemInSlot == null)
             {
                 slotScripts[i].SetItem(itemToAdd);
+
+                // Apply the item's effects immediately
+                if (itemToAdd.effects != null)
+                {
+                    foreach (var effect in itemToAdd.effects)
+                    {
+                        if (effect != null)
+                        {
+                            effect.ApplyEffect(gameObject); // Apply the effect to the player
+                        }
+                    }
+                }
+
                 break;
             }
         }
-
         RefreshUI();
         Debug.Log($"Added {itemToAdd.itemName} to inventory.");
     }
@@ -118,12 +132,32 @@ public class InventoryManager : MonoBehaviour
             if (slotScripts[i].itemInSlot == itemToRemove)
             {
                 slotScripts[i].ClearSlot();
+
+                // Remove all effects associated with the item
+                if (itemToRemove.effects != null)
+                {
+                    foreach (var effect in itemToRemove.effects)
+                    {
+                        if (effect != null)
+                        {
+                            // Find the active effect and remove it
+                            effect.RemoveEffect(gameObject); // Reverse the effect on the player
+                            var activeEffect = activeItemEffects.Find(e => e.GetType() == effect.GetType());
+                            if (activeEffect != null)
+                            {
+                                activeEffect.OnRemoveFromInventory(gameObject);
+                                activeItemEffects.Remove(activeEffect);
+                                Destroy(activeEffect.gameObject);
+                            }
+                        }
+                    }
+                }
+
                 break;
             }
         }
 
         RefreshUI();
-        Debug.Log($"Removed {itemToRemove.itemName} from inventory.");
     }
 
 
@@ -182,28 +216,29 @@ public class InventoryManager : MonoBehaviour
         selectedSlot = GetClosestSlot();
         if (selectedSlot == null || selectedSlot.itemInSlot == null)
         {
-            return false; // no item to move
+            return false; // No item to move
         }
+
         tempItem = selectedSlot.itemInSlot; // Store the item being moved
         selectedSlot.ClearSlot();
         isMovingItem = true;
 
-        RefreshUI(); // Call this first to reset all colors
+        // Remove the item's effects
+        if (tempItem.effects != null)
+        {
+            foreach (var effect in tempItem.effects)
+            {
+                if (effect != null)
+                {
+                    effect.RemoveEffect(gameObject); // Reverse the effect on the player
+                }
+            }
+        }
 
-        // Highlight the item image in the selected slot AFTER RefreshUI
-        var slotObj = slots[selectedSlot.slotIndex];
-        var itemImg = slotObj.transform.GetChild(0).GetComponent<Image>();
-        if (itemImg != null)
-            itemImg.color = slotHighlightColor; // Set to blue
-
-        // Highlight the slot background (grid)
-        var slotBgImg = slots[selectedSlot.slotIndex].GetComponent<Image>();
-        if (slotBgImg != null)
-            slotBgImg.color = slotNormalColor; // Transparent for normal
-
+        RefreshUI();
         return true;
     }
-    
+
     private bool EndMoveItem()
     {
         if (tempItem == null)
@@ -234,6 +269,18 @@ public class InventoryManager : MonoBehaviour
             else
             {
                 selectedSlot.ClearSlot(); // Original slot stays empty if nothing to swap
+            }
+
+            // Reapply the item's effects
+            if (tempItem.effects != null)
+            {
+                foreach (var effect in tempItem.effects)
+                {
+                    if (effect != null)
+                    {
+                        effect.ApplyEffect(gameObject); // Apply the effect to the player
+                    }
+                }
             }
 
             // Reset color
@@ -269,8 +316,50 @@ public class InventoryManager : MonoBehaviour
             return false;
         }
     }
+    public bool IsMovingItem => isMovingItem;
 
     #endregion moving stuff around
 
-    public bool IsMovingItem => isMovingItem;
+    #region Applying Items
+
+    private void ApplyItemEffects(ItemClass item)
+    {
+        if (item != null && item.effects != null)
+        {
+            foreach (ItemEffect effect in item.effects)
+            {
+                if (effect != null)
+                    effect.ApplyEffect(gameObject);
+            }
+        }
+    }
+
+    public void TriggerDamageEffects(DamageData damage)
+    {
+        foreach (var slot in slotScripts)
+        {
+            var item = slot.itemInSlot;
+            if (item != null && item.effects != null)
+            {
+                foreach (var effect in item.effects)
+                {
+                    if (effect != null)
+                        effect.OnDamageTaken(damage);
+                }
+            }
+        }
+    }
+
+    public void TriggerOnAttack(Projectile projectile)
+    {
+        foreach (var effect in activeItemEffects)
+        {
+            if (effect.ShouldApplyOnAttack())
+                effect.OnAttack(projectile);
+        }
+    }
+    #endregion Applying Items
+
+    // Add this property to InventoryManager
+    public IReadOnlyList<ItemEffectBehaviour> ActiveItemEffects => activeItemEffects;
 }

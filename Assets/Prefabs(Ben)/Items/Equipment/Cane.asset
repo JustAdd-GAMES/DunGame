@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1979c37346adfb4eaa90a69a3f275ad, type: 3}
+  m_Name: Cane
+  m_EditorClassIdentifier: 
+  itemID: 0
+  itemDescription: 'Now granny has no cane... '
+  itemName: Old Woman's Cane
+  itemIcon: {fileID: 5251615991868785136, guid: 31ab685004a32b74cafe53362e6c04ba, type: 3}
+  stackable: 1
+  effectPrefab: {fileID: 0}
+  effects:
+  - {fileID: 11400000, guid: a7f9934b6d9a36c4f8159080edf1aa6c, type: 2}
+  equipmentType: 0

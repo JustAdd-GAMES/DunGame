@@ -149,9 +149,11 @@ GameObject:
   - component: {fileID: 7975449124231529758}
   - component: {fileID: 8249822957172511915}
   - component: {fileID: 4285086406301593767}
-  - component: {fileID: 1117235096528203313}
   - component: {fileID: 2712021886836340370}
   - component: {fileID: 381358521062303027}
+  - component: {fileID: 4498529258741982833}
+  - component: {fileID: 7132999671957779062}
+  - component: {fileID: 7039259486125946869}
   m_Layer: 0
   m_Name: Body
   m_TagString: Untagged
@@ -294,19 +296,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &1117235096528203313
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5279325729195024261}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 06ab1986df5cce34a833df9cd194d1ce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 5
 --- !u!95 &2712021886836340370
 Animator:
   serializedVersion: 7
@@ -344,8 +333,48 @@ MonoBehaviour:
   projectilePrefab: {fileID: 20427883891063926, guid: 0be6866253dcff94493b67e68e2fe5bc, type: 3}
   firePoint: {fileID: 3575033198742532093}
   crosshairPrefab: {fileID: 17717157449232667, guid: 7d6ff9533d50495409e3093d2aade71e, type: 3}
-  crosshairDistance: 1
+  crosshairDistance: 0.5
   fireCooldown: 0.2
+--- !u!114 &4498529258741982833
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5279325729195024261}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad63497d99a6d8c4383b41b251a6b6be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+--- !u!114 &7132999671957779062
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5279325729195024261}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: deff8050f29248e4cbf6c2a90deac211, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxPotions: 5
+  currentPotions: 5
+--- !u!114 &7039259486125946869
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5279325729195024261}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06ab1986df5cce34a833df9cd194d1ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 0
 --- !u!1 &6209925696179415221
 GameObject:
   m_ObjectHideFlags: 0

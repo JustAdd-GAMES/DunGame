@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -9,8 +10,8 @@ public class PlayerShooting : MonoBehaviour
     [SerializeField] private GameObject crosshairPrefab;
     
     [Header("Settings")]
-    [SerializeField] private float crosshairDistance = 1.5f;
-    [SerializeField] private float fireCooldown = 0.2f;
+    [SerializeField] private float crosshairDistance;
+    [SerializeField] private float fireCooldown;
     
     private Camera mainCamera;
     private GameObject crosshair;
@@ -59,8 +60,19 @@ public class PlayerShooting : MonoBehaviour
     private void ShootProjectile()
     {
         Vector2 fireDirection = (crosshair.transform.position - transform.position).normalized;
-        Instantiate(projectilePrefab, crosshair.transform.position, Quaternion.identity)
-            .GetComponent<Projectile>().Initialize(fireDirection);
+        var projectileObj = Instantiate(projectilePrefab, crosshair.transform.position, Quaternion.identity);
+        var projectile = projectileObj.GetComponent<Projectile>();
+        projectile.Initialize(fireDirection, inventoryManager.ActiveItemEffects.ToList());
+
+        // Apply OnAttack effects
+        if (inventoryManager != null)
+        {
+            foreach (var effect in inventoryManager.ActiveItemEffects)
+            {
+                if (effect != null && effect.ShouldApplyOnAttack())
+                    effect.OnAttack(projectile);
+            }
+        }
     }
 
     private void OnDisable()

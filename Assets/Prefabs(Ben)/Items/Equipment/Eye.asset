@@ -9,13 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 349d82f0706b0a94fbc3ddf978f302f1, type: 3}
-  m_Name: Sword
+  m_Script: {fileID: 11500000, guid: d1979c37346adfb4eaa90a69a3f275ad, type: 3}
+  m_Name: Eye
   m_EditorClassIdentifier: 
-  itemID: 1
+  itemID: 0
   itemDescription: 
-  itemName: Wooden Sword
-  itemIcon: {fileID: 5206302024500879324, guid: 88018d0d6bdf44c4d8d0b96141f26c1a, type: 3}
-  toolType: 0
-  damage: 1
-  atkSpeed: 1
+  itemName: 
+  itemIcon: {fileID: 0}
+  stackable: 1
+  effectPrefab: {fileID: 0}
+  effects: []
+  equipmentType: 0
