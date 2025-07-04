@@ -47,6 +47,7 @@ public class RoomManager : MonoBehaviour
 
     void SpawnTwoAdjacentRooms(Cell originCell) // Determines which cells are available for spawning and then spawns them
     {
+        Debug.Log("YO YO YO");
         Vector2Int[] directions = new Vector2Int[]
         {
             Vector2Int.up, Vector2Int.right, Vector2Int.down, Vector2Int.left
@@ -89,11 +90,13 @@ public class RoomManager : MonoBehaviour
             if (cell != null && cell.gridPosition == gridPos)
                 return cell;
         }
+        Debug.Log("Cells aren't being found");
         return null;
     }
 
     public void NotifyRoomEntered(Cell cell) // Updates Active Room List
     {
+        
         if (!enteredCellsThisRound.Contains(cell))
         {
             enteredCellsThisRound.Add(cell);
