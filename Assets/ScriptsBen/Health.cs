@@ -18,12 +18,7 @@ public class Health : MonoBehaviour
 
     private void Update()
     {
-        // Check if the space bar is pressed
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            ModifyHealth(-50f); // Take 50 damage
-        }
-
+       
         // Check if health has decreased
         if (currentHealth < previousHealth)
         {

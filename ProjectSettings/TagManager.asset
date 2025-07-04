@@ -6,6 +6,8 @@ TagManager:
   tags:
   - EnemySpawner
   - Enemy
+  - PickUp
+  - Projectile
   layers:
   - Default
   - TransparentFX
