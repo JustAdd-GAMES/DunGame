@@ -5,6 +5,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
 
     public int currentEnemies = 0;
+    public bool allEnemiesCleared = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -26,6 +27,7 @@ public class GameManager : MonoBehaviour
     public void RegisterEnemy() // Adds enemies to the game
     {
         currentEnemies++;
+        allEnemiesCleared = false;
         Debug.Log($"Enemy spawned. Total enemies: {currentEnemies}");
     }
 
@@ -33,5 +35,26 @@ public class GameManager : MonoBehaviour
     {
         currentEnemies = Mathf.Max(0, currentEnemies - 1);
         Debug.Log($"Enemy Died. Total enemies: {currentEnemies}");
+
+        if (currentEnemies == 0)
+        {
+            allEnemiesCleared = true;
+            Debug.Log("All enemies cleared");
+        }
+    }
+
+    public void DestroyAllEnemies()
+    {
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+
+        foreach (GameObject enemy in enemies)
+        {
+            Destroy(enemy);
+        }
+
+        currentEnemies = 0;
+        allEnemiesCleared = true;
+
+        Debug.Log("Manually killed all enemies with spacebar");
     }
 }

@@ -11,8 +11,6 @@ public class RoomManager : MonoBehaviour
     private List<Cell> enteredCellsThisRound = new List<Cell>(); // List of all Active Rooms
 
     private int playerDepth; // Depth of player decides the difficulty (how far from center)
-    private bool waitingToSpawnRooms = false;
-
     void Awake()
     {
         if (Instance == null) Instance = this;
@@ -23,12 +21,27 @@ public class RoomManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space)) // On Space for each Active Room spawn 2 new roosm
         {
-            foreach (var cell in enteredCellsThisRound)
+            if (GameManager.Instance.allEnemiesCleared)
             {
-                SpawnTwoAdjacentRooms(cell);
-            }
+                foreach (var cell in enteredCellsThisRound)
+                {
+                    SpawnTwoAdjacentRooms(cell);
+                }
 
-            enteredCellsThisRound.Clear();
+                enteredCellsThisRound.Clear();
+                GameManager.Instance.allEnemiesCleared = false;
+            }
+            else
+            {
+                // Manually kills all enemies for testing
+                GameManager.Instance.DestroyAllEnemies();
+                foreach (var cell in enteredCellsThisRound)
+                {
+                    SpawnTwoAdjacentRooms(cell);
+                }
+                enteredCellsThisRound.Clear();
+                GameManager.Instance.allEnemiesCleared = false;
+            }
         }
     }
 
