@@ -8,9 +8,10 @@ public class RoomManager : MonoBehaviour
     public GameObject roomPrefab;
     public GridManager gridManager;
 
-    private List<Cell> enteredCellsThisRound = new List<Cell>();
+    private List<Cell> enteredCellsThisRound = new List<Cell>(); // List of all Active Rooms
 
-    private int playerDepth;
+    private int playerDepth; // Depth of player decides the difficulty (how far from center)
+    private bool waitingToSpawnRooms = false;
 
     void Awake()
     {
@@ -20,7 +21,7 @@ public class RoomManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space)) // On Space for each Active Room spawn 2 new roosm
         {
             foreach (var cell in enteredCellsThisRound)
             {
@@ -31,7 +32,7 @@ public class RoomManager : MonoBehaviour
         }
     }
 
-    void SpawnTwoAdjacentRooms(Cell originCell)
+    void SpawnTwoAdjacentRooms(Cell originCell) // Determines which cells are available for spawning and then spawns them
     {
         Vector2Int[] directions = new Vector2Int[]
         {
@@ -56,7 +57,8 @@ public class RoomManager : MonoBehaviour
             Cell target = spawnable[Random.Range(0, spawnable.Count)];
             spawnable.Remove(target);
 
-            Instantiate(roomPrefab, target.transform.position, Quaternion.identity);
+            GameObject roomInstance = Instantiate(roomPrefab, target.transform.position, Quaternion.identity);
+            target.roomObject = roomInstance;
             target.hasRoom = true;
             target.SpawnWalls(gridManager.grid);
 
@@ -77,7 +79,7 @@ public class RoomManager : MonoBehaviour
         return null;
     }
 
-    public void NotifyRoomEntered(Cell cell)
+    public void NotifyRoomEntered(Cell cell) // Updates Active Room List
     {
         if (!enteredCellsThisRound.Contains(cell))
         {
@@ -85,6 +87,16 @@ public class RoomManager : MonoBehaviour
             Vector2Int pos = cell.gridPosition;
             playerDepth = Mathf.Max(Mathf.Abs(pos.x), Mathf.Abs(pos.y));
             Debug.Log($"Player at depth: {playerDepth}");
+
+            GameObject room = cell.roomObject;
+            if (room != null)
+            {
+                EnemySpawner[] spawners = room.GetComponentsInChildren<EnemySpawner>();
+                foreach (var spawner in spawners)
+                {
+                    spawner.TriggerSpawn();
+                }
+            }
         }
     }
 }

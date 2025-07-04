@@ -18,6 +18,8 @@ public class Cell : MonoBehaviour
     public GameObject horizontalWallPrefab;
     public GameObject veritcalWallPrefab;
 
+    public GameObject roomObject;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
