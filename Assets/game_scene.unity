@@ -127,6 +127,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 91212828100704953, guid: 373efc3ce432623449de8c67382b2793, type: 3}
+      propertyPath: m_Mass
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 91212828100704953, guid: 373efc3ce432623449de8c67382b2793, type: 3}
+      propertyPath: m_Interpolate
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5077285953782735511, guid: 373efc3ce432623449de8c67382b2793, type: 3}
       propertyPath: m_Name
       value: test_player (1)
