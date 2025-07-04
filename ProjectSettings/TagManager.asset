@@ -4,15 +4,16 @@
 TagManager:
   serializedVersion: 3
   tags:
-  - PickUp
+  - EnemySpawner
+  - Enemy
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - PickUp
+  - Wall
   - Water
   - UI
-  - Projectile
+  - 
   - 
   - 
   - 
