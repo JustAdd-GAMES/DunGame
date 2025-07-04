@@ -170,5 +170,5 @@ MonoBehaviour:
   lifetime: 3
   collisionLayers:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 0
   effectsToApply: []

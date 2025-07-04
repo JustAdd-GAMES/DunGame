@@ -23,9 +23,15 @@ public class Projectile : MonoBehaviour
     // When initializing the projectile, pass the effects
     public void Initialize(Vector2 fireDirection, List<ItemEffectBehaviour> effects = null)
     {
-        direction = fireDirection.normalized;
+        direction = fireDirection.normalized; // Normalize the direction
         effectsToApply = effects;
-        Destroy(gameObject, lifetime);
+
+        if (rb != null)
+        {
+            rb.linearVelocity = direction * speed; // Set the velocity of the Rigidbody2D
+        }
+
+        Destroy(gameObject, lifetime); // Destroy the projectile after its lifetime
     }
 
     private void FixedUpdate()

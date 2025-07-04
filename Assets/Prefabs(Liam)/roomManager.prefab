@@ -45,4 +45,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roomPrefab: {fileID: 8247238297150072142, guid: 147006953c7231845ad776686a083cfc, type: 3}
-  gridManager: {fileID: 0}
+  gridManager: {fileID: 1181978947607039250, guid: 5f92220d9987e9e4c9feb22e7dcffbca, type: 3}

@@ -59,8 +59,9 @@ public class PlayerShooting : MonoBehaviour
 
     private void ShootProjectile()
     {
+        Debug.Log("Shooting projectile...");
         Vector2 fireDirection = (crosshair.transform.position - transform.position).normalized;
-        var projectileObj = Instantiate(projectilePrefab, crosshair.transform.position, Quaternion.identity);
+        var projectileObj = Instantiate(projectilePrefab, firePoint.position, Quaternion.identity);
         var projectile = projectileObj.GetComponent<Projectile>();
         projectile.Initialize(fireDirection, inventoryManager.ActiveItemEffects.ToList());
 

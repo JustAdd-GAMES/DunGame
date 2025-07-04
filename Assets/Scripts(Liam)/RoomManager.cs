@@ -13,6 +13,10 @@ public class RoomManager : MonoBehaviour
     private int playerDepth; // Depth of player decides the difficulty (how far from center)
     void Awake()
     {
+        if (gridManager == null)
+        {
+            Debug.LogError("GridManager is not assigned!");
+        }
         if (Instance == null) Instance = this;
         else Destroy(gameObject);
     }
@@ -21,7 +25,17 @@ public class RoomManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space)) // On Space for each Active Room spawn 2 new roosm
         {
-            if (GameManager.Instance.allEnemiesCleared)
+             // Manually kills all enemies for testing
+                GameManager.Instance.DestroyAllEnemies();
+                foreach (var cell in enteredCellsThisRound)
+                {
+                    
+                    SpawnTwoAdjacentRooms(cell);
+                }
+                enteredCellsThisRound.Clear();
+                GameManager.Instance.allEnemiesCleared = false;
+
+           if (GameManager.Instance.allEnemiesCleared)
             {
                 foreach (var cell in enteredCellsThisRound)
                 {
@@ -33,20 +47,14 @@ public class RoomManager : MonoBehaviour
             }
             else
             {
-                // Manually kills all enemies for testing
-                GameManager.Instance.DestroyAllEnemies();
-                foreach (var cell in enteredCellsThisRound)
-                {
-                    SpawnTwoAdjacentRooms(cell);
-                }
-                enteredCellsThisRound.Clear();
-                GameManager.Instance.allEnemiesCleared = false;
+
             }
         }
     }
 
     void SpawnTwoAdjacentRooms(Cell originCell) // Determines which cells are available for spawning and then spawns them
     {
+        Debug.Log($"Spawning rooms adjacent to cell at {originCell.gridPosition}");
         Vector2Int[] directions = new Vector2Int[]
         {
             Vector2Int.up, Vector2Int.right, Vector2Int.down, Vector2Int.left
@@ -63,6 +71,7 @@ public class RoomManager : MonoBehaviour
                 spawnable.Add(neighbor);
             }
         }
+        Debug.Log($"Spawnable cells count: {spawnable.Count}");
 
         int count = Mathf.Min(2, spawnable.Count);
         for (int i = 0; i < count; i++)
@@ -70,7 +79,13 @@ public class RoomManager : MonoBehaviour
             Cell target = spawnable[Random.Range(0, spawnable.Count)];
             spawnable.Remove(target);
 
+            if (roomPrefab == null)
+            {
+                Debug.LogError("Room prefab is not assigned!");
+                return;
+            }
             GameObject roomInstance = Instantiate(roomPrefab, target.transform.position, Quaternion.identity);
+            Debug.Log($"Room spawned at {target.gridPosition}");
             target.roomObject = roomInstance;
             target.hasRoom = true;
             target.SpawnWalls(gridManager.grid);
@@ -87,13 +102,18 @@ public class RoomManager : MonoBehaviour
         {
             Cell cell = child.GetComponent<Cell>();
             if (cell != null && cell.gridPosition == gridPos)
+            {
+                Debug.Log($"Found cell at {gridPos}");
                 return cell;
+            }
         }
+        Debug.LogWarning($"No cell found at {gridPos}");
         return null;
     }
 
     public void NotifyRoomEntered(Cell cell) // Updates Active Room List
     {
+        
         if (!enteredCellsThisRound.Contains(cell))
         {
             enteredCellsThisRound.Add(cell);
