@@ -121,7 +121,7 @@ public class InventoryManager : MonoBehaviour
             }
         }
         RefreshUI();
-        Debug.Log($"Added {itemToAdd.itemName} to inventory.");
+        //Debug.Log($"Added {itemToAdd.itemName} to inventory.");
     }
 
 

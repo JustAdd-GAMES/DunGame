@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
 
     public int currentEnemies = 0;
     public bool allEnemiesCleared = false;
+    public bool roomsSpawnedThisWave = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -35,11 +36,21 @@ public class GameManager : MonoBehaviour
     {
         currentEnemies = Mathf.Max(0, currentEnemies - 1);
         Debug.Log($"Enemy Died. Total enemies: {currentEnemies}");
+        
 
-        if (currentEnemies == 0)
+        if (currentEnemies == 0 && !roomsSpawnedThisWave)
         {
             allEnemiesCleared = true;
             Debug.Log("All enemies cleared");
+
+            if (RoomManager.Instance != null)
+            {
+                RoomManager.Instance.SpawnNewRoomsFromActiveRooms();
+            }
+            else
+            {
+                Debug.LogWarning("RoomManager instance not found");
+            }
         }
     }
 

@@ -36,7 +36,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 6210097035908990183}
@@ -199,8 +199,8 @@ MonoBehaviour:
   projectilePrefab: {fileID: 20427883891063926, guid: 0be6866253dcff94493b67e68e2fe5bc, type: 3}
   firePoint: {fileID: 6210097035908990183}
   crosshairPrefab: {fileID: 17717157449232667, guid: 7d6ff9533d50495409e3093d2aade71e, type: 3}
-  crosshairDistance: 0.5
-  fireCooldown: 0.2
+  crosshairDistance: 1
+  fireCooldown: 0.4
 --- !u!114 &3686885124408609983
 MonoBehaviour:
   m_ObjectHideFlags: 0

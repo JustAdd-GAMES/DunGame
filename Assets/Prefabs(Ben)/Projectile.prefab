@@ -165,10 +165,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2c7927c25b20ac4f911ffe0f656dd3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
-  damage: 1
-  lifetime: 3
+  speed: 6
+  damage: 5
+  lifetime: 2
   collisionLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 73
   effectsToApply: []

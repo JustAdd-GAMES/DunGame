@@ -4,8 +4,8 @@ using System.Collections.Generic;
 public class Projectile : MonoBehaviour
 {
     [Header("Projectile Settings")]
-    [SerializeField] private float speed = 10f;
-    [SerializeField] private int damage = 1;
+    [SerializeField] private float speed = 6f;
+    [SerializeField] private int damage = 5;
     [SerializeField] private float lifetime = 3f;
     [SerializeField] private LayerMask collisionLayers;
     
@@ -54,7 +54,7 @@ public class Projectile : MonoBehaviour
     private void HandleCollision(Collider2D collision)
     {
         // Damage logic
-        IDamageable damageable = collision.GetComponent<IDamageable>();
+        IDamageable damageable = collision.GetComponentInParent<IDamageable>();
         if (damageable != null)
         {
             damageable.TakeDamage(damage);
