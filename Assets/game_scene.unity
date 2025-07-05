@@ -896,6 +896,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 26b80d7e70f38eb40ac81564a53f1273, type: 3}
+--- !u!1 &145629910 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4754152969457206788, guid: ec74cc81d3fcb4f4f99c1087a1bfa088, type: 3}
+  m_PrefabInstance: {fileID: 8373427425863245657}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &145629919 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4585187262682588799, guid: ec74cc81d3fcb4f4f99c1087a1bfa088, type: 3}
@@ -1097,6 +1102,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
+    - target: {fileID: 7789915490698136160, guid: d27090706c4e269468da1749cd0b5f07, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 145629910}
+    - target: {fileID: 7789915490698136160, guid: d27090706c4e269468da1749cd0b5f07, type: 3}
+      propertyPath: itemPrefabs.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7789915490698136160, guid: d27090706c4e269468da1749cd0b5f07, type: 3}
+      propertyPath: 'itemPrefabs.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2725424488404641664, guid: 4f42c6cf65445f742a0328b00abc5f5a, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

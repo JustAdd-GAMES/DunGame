@@ -102,5 +102,10 @@ public class RoomManager : MonoBehaviour
 
         enteredCellsThisRound.Clear();
     }
+
+    public int GetEnteredRoomCount()
+    {
+        return enteredCellsThisRound.Count;
+    }
 }
 
