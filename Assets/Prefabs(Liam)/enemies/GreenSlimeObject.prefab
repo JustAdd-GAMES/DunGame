@@ -151,6 +151,7 @@ GameObject:
   - component: {fileID: 3738588433592581427}
   - component: {fileID: 3118829444170814398}
   - component: {fileID: 3802077043315472364}
+  - component: {fileID: 8340734875893999019}
   m_Layer: 0
   m_Name: GreenSlimeObject
   m_TagString: Enemy
@@ -168,7 +169,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 3, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0}
+  m_LocalScale: {x: 0.4, y: 0.4, z: 0}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 125508893630342021}
@@ -354,3 +355,16 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 0.6
+--- !u!114 &8340734875893999019
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6704928663370903172}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55afe1da5180efe46b7f13611d36138e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyData: {fileID: 11400000, guid: b863a8390ee35c44fa5fc19102430b15, type: 2}

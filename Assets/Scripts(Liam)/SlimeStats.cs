@@ -10,7 +10,7 @@ public class SlimeStats : MonoBehaviour, IDamageable
     {
         if (enemyData == null)
         {
-            Debug.LogError($"{gameObject.name} has no Enemy ScriptableObject assigned!");
+            //Debug.LogError($"{gameObject.name} has no Enemy ScriptableObject assigned!");
             return;
         }
 
@@ -20,7 +20,7 @@ public class SlimeStats : MonoBehaviour, IDamageable
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
-        Debug.Log($"{enemyData.EnemyName} took {damage} damage. Remaining: {currentHealth}");
+        //Debug.Log($"{enemyData.EnemyName} took {damage} damage. Remaining: {currentHealth}");
 
         if (currentHealth <= 0)
         {
@@ -38,10 +38,10 @@ public class SlimeStats : MonoBehaviour, IDamageable
         }
         else
         {
-            Debug.Log("GameManager instance not foudn");
+            //Debug.Log("GameManager instance not foudn");
         }
 
-        Destroy(transform.root.gameObject);
+        Destroy(gameObject);
     }
 
     public float GetDamageAmount()

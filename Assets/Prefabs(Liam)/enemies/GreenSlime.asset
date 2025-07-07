@@ -15,7 +15,7 @@ MonoBehaviour:
   EnemyId: 0
   EnemyName: Green Slime
   EnemyHealth: 10
-  EnemyDamage: 1
+  EnemyDamage: 20
   EnemySpeed: 2
   EnemyDifficulty: 1
   EnemyIcon: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}

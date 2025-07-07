@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - PickUp
   - Projectile
+  - EnemyDamage
   layers:
   - Default
   - TransparentFX
@@ -15,8 +16,8 @@ TagManager:
   - Wall
   - Water
   - UI
-  - 
-  - 
+  - EnemyHitBox
+  - Projectile
   - 
   - 
   - 

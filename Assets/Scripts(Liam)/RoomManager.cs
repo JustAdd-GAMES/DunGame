@@ -19,35 +19,11 @@ public class RoomManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space)) // On Space for each Active Room spawn 2 new roosm
-        {
-            if (GameManager.Instance.allEnemiesCleared)
-            {
-                foreach (var cell in enteredCellsThisRound)
-                {
-                    SpawnTwoAdjacentRooms(cell);
-                }
 
-                enteredCellsThisRound.Clear();
-                GameManager.Instance.allEnemiesCleared = false;
-            }
-            else
-            {
-                // Manually kills all enemies for testing
-                GameManager.Instance.DestroyAllEnemies();
-                foreach (var cell in enteredCellsThisRound)
-                {
-                    SpawnTwoAdjacentRooms(cell);
-                }
-                enteredCellsThisRound.Clear();
-                GameManager.Instance.allEnemiesCleared = false;
-            }
-        }
     }
 
     void SpawnTwoAdjacentRooms(Cell originCell) // Determines which cells are available for spawning and then spawns them
     {
-        Debug.Log("YO YO YO");
         Vector2Int[] directions = new Vector2Int[]
         {
             Vector2Int.up, Vector2Int.right, Vector2Int.down, Vector2Int.left
@@ -96,10 +72,11 @@ public class RoomManager : MonoBehaviour
 
     public void NotifyRoomEntered(Cell cell) // Updates Active Room List
     {
-        
+
         if (!enteredCellsThisRound.Contains(cell))
         {
             enteredCellsThisRound.Add(cell);
+            GameManager.Instance.roomsSpawnedThisWave = false;
             Vector2Int pos = cell.gridPosition;
             playerDepth = Mathf.Max(Mathf.Abs(pos.x), Mathf.Abs(pos.y));
             Debug.Log($"Player at depth: {playerDepth}");
@@ -114,6 +91,21 @@ public class RoomManager : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void SpawnNewRoomsFromActiveRooms()
+    {
+        foreach (var cell in enteredCellsThisRound)
+        {
+            SpawnTwoAdjacentRooms(cell);
+        }
+
+        enteredCellsThisRound.Clear();
+    }
+
+    public int GetEnteredRoomCount()
+    {
+        return enteredCellsThisRound.Count;
     }
 }
 

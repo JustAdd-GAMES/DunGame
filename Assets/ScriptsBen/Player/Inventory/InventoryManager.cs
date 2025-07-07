@@ -121,7 +121,7 @@ public class InventoryManager : MonoBehaviour
             }
         }
         RefreshUI();
-        Debug.Log($"Added {itemToAdd.itemName} to inventory.");
+        //Debug.Log($"Added {itemToAdd.itemName} to inventory.");
     }
 
 
@@ -200,7 +200,7 @@ public class InventoryManager : MonoBehaviour
                 slots[i].transform.position
             );
             float dist = Vector2.Distance(slotScreenPos, mousePos);
-            Debug.Log($"Slot {i} screenPos: {slotScreenPos}, mousePos: {mousePos}, dist: {dist}");
+            //Debug.Log($"Slot {i} screenPos: {slotScreenPos}, mousePos: {mousePos}, dist: {dist}");
             if (dist < 50f && dist < minDist)
             {
                 minDist = dist;
