@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -5391192448260566258}
   - component: {fileID: 4603375945364096868}
   m_Layer: 3
-  m_Name: PickUpItem
+  m_Name: CanePickUp
   m_TagString: PickUp
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -113,7 +113,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9523a06d9e846c848bca51a0a81ab4db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  item: {fileID: 0}
+  item: {fileID: 11400000, guid: 598d41654eafe3449a11de35ff1c4aaf, type: 2}
 --- !u!212 &-5391192448260566258
 SpriteRenderer:
   m_ObjectHideFlags: 0
