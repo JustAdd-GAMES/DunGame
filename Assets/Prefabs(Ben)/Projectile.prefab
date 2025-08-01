@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3044525351763428582}
   - component: {fileID: 5750536056635932061}
   - component: {fileID: 4839635052066408967}
+  - component: {fileID: 2432448579223197142}
   m_Layer: 7
   m_Name: Projectile
   m_TagString: Projectile
@@ -172,3 +173,25 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 73
   effectsToApply: []
+--- !u!95 &2432448579223197142
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 20427883891063926}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3acfb72fdc8bb0642ab43541dd35345f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

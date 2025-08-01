@@ -9,6 +9,8 @@ public class Health : MonoBehaviour
 
     public float MaxHealth => maxHealth;
     public float CurrentHealth => currentHealth;
+    
+public PlayerStats PlayerStats { get; private set; }
 
     private void Awake()
     {
@@ -18,7 +20,6 @@ public class Health : MonoBehaviour
 
     private void Update()
     {
-       
         // Check if health has decreased
         if (currentHealth < previousHealth)
         {
@@ -51,8 +52,18 @@ public class Health : MonoBehaviour
 
     private void OnHealthDepleted()
     {
-        Debug.Log("Player health is zero. Restarting game...");
-        RestartGame();
+        if (PlayerStats.GetCurrentPotions() > 0)
+        {
+            PlayerStats.currentPotions--;
+            PlayerStats.Heal(20f); // heal suto for less than if manually used potion
+            Debug.Log($"Player health is zero, but potions available. Remaining Potions: {PlayerStats.GetCurrentPotions()}");   
+        }
+        else
+        {
+            Debug.Log("Player health is zero. Restarting game...");
+            RestartGame();
+        }
+        
     }
 
     private void RestartGame()

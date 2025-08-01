@@ -38,7 +38,7 @@ public class Cell : MonoBehaviour
         {
             entered = true;
             RoomManager.Instance.NotifyRoomEntered(this);
-            //Debug.Log("Entered room at " + gridPosition);
+            Debug.Log("Entered room at " + gridPosition);
         }
     }
 

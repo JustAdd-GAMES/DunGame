@@ -9,6 +9,7 @@ public class Projectile : MonoBehaviour
     [SerializeField] private float lifetime = 3f;
     [SerializeField] private LayerMask collisionLayers;
     
+    private Animator animator;
     private Vector2 direction;
     private Rigidbody2D rb;
 
@@ -17,6 +18,7 @@ public class Projectile : MonoBehaviour
 
     private void Awake()
     {
+        animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
     }
 
@@ -75,8 +77,35 @@ public class Projectile : MonoBehaviour
                     effect.OnProjectileHit(this, collision);
             }
         }
+
+        if (animator != null)
+        {
+
+            rb.linearVelocity = direction * speed * 0; // Stop the projectile's movement
+            animator?.SetTrigger("isDie");
+            //  disable the collider to prevent further collisions
+            Collider2D collider = GetComponent<Collider2D>();
+            if (collider != null)
+            {
+                collider.enabled = false;
+            }
+
+            if (rb != null)
+            {
+                rb.bodyType = RigidbodyType2D.Static; // Set Rigidbody to static to stop physics interactions
+            }
+
+            // Wait for the animation to finish before destroying the projectile
+                Destroy(gameObject, animator.GetCurrentAnimatorStateInfo(0).length);
+
+        }
+        else
+        {
+            Destroy(gameObject); // Destroy the projectile immediately if no animator is present
+        }
         
-        Destroy(gameObject);
+        
+       
     }
 
     // Visualize direction in editor
